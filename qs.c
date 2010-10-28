@@ -120,6 +120,7 @@ int qs_decode(char * qs)
         i++;  j++;
     }
     qs[i] = '\0';
+
     return i;
 }
 
@@ -184,5 +185,6 @@ char * qs_scanvalue(const char * key, const char * qs, char * val, size_t val_le
         if ( val_len > 0 )
             val[0] = '\0';
     }
+
     return val;
 }
