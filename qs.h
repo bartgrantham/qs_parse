@@ -1,3 +1,6 @@
+/*  Licensed under the MIT License by Bart Grantham, 2010.  See ./LICENSE or
+ *  http://www.opensource.org/licenses/mit-license.php
+ */
 #ifdef __cplusplus
 extern "C" {
 #endif

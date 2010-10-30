@@ -1,3 +1,6 @@
+/*  Licensed under the MIT License by Bart Grantham, 2010.  See ./LICENSE or
+ *  http://www.opensource.org/licenses/mit-license.php
+ */
 #include "qs.h"
 
 // TODO: implement sorting of the qs_kv array; for now ensure it's not compiled
