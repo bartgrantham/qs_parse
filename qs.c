@@ -138,7 +138,7 @@ char * qs_k2v(const char * key, char * qs_kv[], int qs_kv_size)
     for(i=0; i<qs_kv_size; i++)
     {
         // we rely on the unambiguous '=' to find the value in our k/v pair
-        if ( qs_strncmp(key, qs_kv[i], key_len) == 0 )
+        if ( qs_strncmp(key, qs_kv[i], key_len+1) == 0 )
         {
             skip = strcspn(qs_kv[i], "=");
             if ( qs_kv[i][skip] == '=' )
@@ -165,7 +165,7 @@ char * qs_scanvalue(const char * key, const char * qs, char * val, size_t val_le
     key_len = strlen(key);
     while(qs[0] != '#' && qs[0] != '\0')
     {
-        if ( qs_strncmp(key, qs, key_len) == 0 )
+        if ( qs_strncmp(key, qs, key_len+1) == 0 )
             break;
         qs += strcspn(qs, "&") + 1;
     }
