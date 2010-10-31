@@ -188,3 +188,77 @@ char * qs_scanvalue(const char * key, const char * qs, char * val, size_t val_le
 
     return val;
 }
+
+
+int hex2dcolor(char * color, double * r, double * g, double * b, double * a)
+{
+    int i, j;
+
+    i = strlen(color);
+    if ( i != 8 && i != 6 && i != 4 && i != 3 )  return 0;
+    for(j=0; j<i; j++)  if ( ! ISHEX(color[j]) )  return 0;
+    switch(i)
+    {
+        // (H*16+H)/255 ==  H*17/255 == H/15
+        case 3:
+            *r = HEX2DEC(color[0]) / 15.0;
+            *g = HEX2DEC(color[1]) / 15.0;
+            *b = HEX2DEC(color[2]) / 15.0;
+            break;
+        case 4:
+            *r = HEX2DEC(color[0]) / 15.0;
+            *g = HEX2DEC(color[1]) / 15.0;
+            *b = HEX2DEC(color[2]) / 15.0;
+            *a = HEX2DEC(color[3]) / 15.0;
+            break;
+        case 6:
+            *r = ((HEX2DEC(color[0]) * 16) + HEX2DEC(color[1])) / 255.0;
+            *g = ((HEX2DEC(color[2]) * 16) + HEX2DEC(color[3])) / 255.0;
+            *b = ((HEX2DEC(color[4]) * 16) + HEX2DEC(color[5])) / 255.0;
+            break;
+        case 8:
+            *r = ((HEX2DEC(color[0]) * 16) + HEX2DEC(color[1])) / 255.0;
+            *g = ((HEX2DEC(color[2]) * 16) + HEX2DEC(color[3])) / 255.0;
+            *b = ((HEX2DEC(color[4]) * 16) + HEX2DEC(color[5])) / 255.0;
+            *a = ((HEX2DEC(color[6]) * 16) + HEX2DEC(color[7])) / 255.0;
+            break;
+    }
+    return i;
+}
+
+
+int hex2ccolor(char * color, unsigned char * r, unsigned char * g, unsigned char * b, unsigned char * a)
+{
+    int i, j;
+
+    i = strlen(color);
+    if ( i != 8 && i != 6 && i != 4 && i != 3 )  return 0;
+    for(j=0; j<i; j++)  if ( ! ISHEX(color[j]) )  return 0;
+    switch(i)
+    {
+        // (H*16+H) == H*17
+        case 3:
+            *r = HEX2DEC(color[0]) * 17;
+            *g = HEX2DEC(color[1]) * 17;
+            *b = HEX2DEC(color[2]) * 17;
+            break;
+        case 4:
+            *r = HEX2DEC(color[0]) * 17;
+            *g = HEX2DEC(color[1]) * 17;
+            *b = HEX2DEC(color[2]) * 17;
+            *a = HEX2DEC(color[3]) * 17;
+            break;
+        case 6:
+            *r = (HEX2DEC(color[0]) * 16) + HEX2DEC(color[1]);
+            *g = (HEX2DEC(color[2]) * 16) + HEX2DEC(color[3]);
+            *b = (HEX2DEC(color[4]) * 16) + HEX2DEC(color[5]);
+            break;
+        case 8:
+            *r = (HEX2DEC(color[0]) * 16) + HEX2DEC(color[1]);
+            *g = (HEX2DEC(color[2]) * 16) + HEX2DEC(color[3]);
+            *b = (HEX2DEC(color[4]) * 16) + HEX2DEC(color[5]);
+            *a = (HEX2DEC(color[6]) * 16) + HEX2DEC(color[7]);
+            break;
+    }
+    return i;
+}

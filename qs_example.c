@@ -10,8 +10,10 @@ int main(int argc, char * argv[])
     char * kvpairs[NUMKVPAIRS];
     char value[VALSIZE];
     char * value_ptr;
+    unsigned char r, g, b, a;
+    double dr, dg, db, da;
 
-    char getstring[] = "scheme://username:password@domain:port/path?foo=bar&frob&baz=quux#anchor";
+    char getstring[] = "scheme://username:password@domain:port/path?foo=bar&frob&baz=quux&color=09FA#anchor";
 
     /********************************************************/
     /*  The easy, but not as efficient way: qs_scanvalue()  */
@@ -35,6 +37,20 @@ int main(int argc, char * argv[])
         printf("Key %s is set, and the value is: \"%s\"\n", "blah", value);
     else
         printf("Key %s is NOT set\n", "blah");
+
+    if ( qs_scanvalue("color", getstring, value, sizeof(value)) != NULL )
+    {
+        printf("Key %s is set, and the value is: \"%s\"\n", "color", value);
+        if ( hex2ccolor(value, &r, &g, &b, &a) != 0 && hex2dcolor(value, &dr, &dg, &db, &da) != 0 )
+        {
+            printf("    \"%s\" successfully decoded as uchar  : r=%d, g=%d, b=%d, a=%d\n", "color", r, g, b, a);
+            printf("    \"%s\" successfully decoded as double : r=%.2f, g=%.2f, b=%.2f, a=%.2f\n", "color", dr, dg, db, da);
+        }
+        else
+            printf("    \"%s\" NOT successfully decoded\n", "color");
+    }
+    else
+        printf("Key %s is NOT set\n", "color");
 
     printf("\n");
 
@@ -66,6 +82,20 @@ int main(int argc, char * argv[])
         printf("Key %s is set, and the value is: \"%s\"\n", "blah", value_ptr);
     else
         printf("Key %s is NOT set\n", "blah");
+
+    if ( (value_ptr = qs_k2v("color", kvpairs, i)) != NULL )
+    {
+        printf("Key %s is set, and the value is: \"%s\"\n", "color", value_ptr);
+        if ( hex2ccolor(value_ptr, &r, &g, &b, &a) != 0 && hex2dcolor(value_ptr, &dr, &dg, &db, &da) != 0 )
+        {
+            printf("    \"%s\" successfully decoded as uchar  : r=%d, g=%d, b=%d, a=%d\n", "color", r, g, b, a);
+            printf("    \"%s\" successfully decoded as double : r=%.2f, g=%.2f, b=%.2f, a=%.2f\n", "color", dr, dg, db, da);
+        }
+        else
+            printf("    \"%s\" NOT successfully decoded\n", "color");
+    }
+    else
+        printf("Key %s is NOT set\n", "color");
 
     return 0;
 }

@@ -6,6 +6,8 @@ int main(int argc, char * argv[])
     int i,j;
     char * kvpairs[256];
     char value[256];
+    unsigned char r, g, b, a;
+    double dr, dg, db, da;
 
     char foo[]        = "foo";
     char foobar[]     = "foobar";
@@ -25,7 +27,7 @@ int main(int argc, char * argv[])
      *  I should add:
      *  - leading URL junk (before a ?)
      */
-    char getstring[] = "FUNNYJUNK://@?t%65xt=bleh+bleh%20!&font=Vera.ttf&size=40.3&fg=FFFFFF%f&debug1&bg=000&hash=24a%62cdef%7a&rot=123.1&tr+i=cky&debug2#don'tparseme,bro";
+    char getstring[] = "FUNNYJUNK://@?t%65xt=bleh+bleh%20!&font=Vera.ttf&size=40.3&fg=Fa98BF44%f&debug1&bg=0C0&color=FF4455F&hash=24a%62cdef%7a&rot=123.1&tr+i=cky&debug2#don'tparseme,bro";
 
     printf("Testing qs_* functions\n");
 
@@ -70,9 +72,10 @@ int main(int argc, char * argv[])
     printf("        The following should say \"bleh bleh !\" : \"%s\"\n", qs_scanvalue("text", getstring, value, 256));
     printf("        The following should say \"Vera.ttf\"    : \"%s\"\n", qs_scanvalue("font", getstring, value, 256));
     printf("        The following should say \"40.3\"        : \"%s\"\n", qs_scanvalue("size", getstring, value, 256));
-    printf("        The following should say \"FFFFFF\"      : \"%s\"\n", qs_scanvalue("fg", getstring, value, 256));
+    printf("        The following should say \"Fa98BF44\"    : \"%s\"\n", qs_scanvalue("fg", getstring, value, 256));
     printf("        The following should say \"\"            : \"%s\"\n", qs_scanvalue("debug1", getstring, value, 256));
-    printf("        The following should say \"000\"         : \"%s\"\n", qs_scanvalue("bg", getstring, value, 256));
+    printf("        The following should say \"0C0\"         : \"%s\"\n", qs_scanvalue("bg", getstring, value, 256));
+    printf("        The following should say \"FF4455F\"     : \"%s\"\n", qs_scanvalue("color", getstring, value, 256));
     printf("        The following should say \"24abcdefz\"   : \"%s\"\n", qs_scanvalue("hash", getstring, value, 256));
     printf("        The following should say \"123.1\"       : \"%s\"\n", qs_scanvalue("rot", getstring, value, 256));
     printf("        The following should say \"cky\"         : \"%s\"\n", qs_scanvalue("tr i", getstring, value, 256));
@@ -88,14 +91,48 @@ int main(int argc, char * argv[])
     printf("        The following should say \"bleh bleh !\" : \"%s\"\n", qs_k2v("text", kvpairs, i));
     printf("        The following should say \"Vera.ttf\"    : \"%s\"\n", qs_k2v("font", kvpairs, i));
     printf("        The following should say \"40.3\"        : \"%s\"\n", qs_k2v("size", kvpairs, i));
-    printf("        The following should say \"FFFFFF\"      : \"%s\"\n", qs_k2v("fg", kvpairs, i));
+    printf("        The following should say \"Fa98BF44\"    : \"%s\"\n", qs_k2v("fg", kvpairs, i));
     printf("        The following should say \"\"            : \"%s\"\n", qs_k2v("debug1", kvpairs, i));
-    printf("        The following should say \"000\"         : \"%s\"\n", qs_k2v("bg", kvpairs, i));
+    printf("        The following should say \"0C0\"         : \"%s\"\n", qs_k2v("bg", kvpairs, i));
+    printf("        The following should say \"FF4455F\"     : \"%s\"\n", qs_k2v("color", kvpairs, i));
     printf("        The following should say \"24abcdefz\"   : \"%s\"\n", qs_k2v("hash", kvpairs, i));
     printf("        The following should say \"123.1\"       : \"%s\"\n", qs_k2v("rot", kvpairs, i));
     printf("        The following should say \"cky\"         : \"%s\"\n", qs_k2v("tr i", kvpairs, i));
     printf("        The following should say \"\"            : \"%s\"\n", qs_k2v("debug2", kvpairs, i));
     printf("\n");
 
+    printf("    Testing hex2ccolor() and hex2dcolor() with fg (\"%s\"):\n", qs_k2v("fg", kvpairs, i));
+    j = hex2ccolor(qs_k2v("fg", kvpairs, i), &r, &g, &b, &a);
+    printf("        hex2ccolor() should have decoded 8 chars, r/g/b/a should be 250/152/191/68      : %d chars decoded, r/g/b/a is %d/%d/%d/%d\n", j, r, g, b, a);
+    j = hex2dcolor(qs_k2v("fg", kvpairs, i), &dr, &dg, &db, &da);
+    printf("        hex2dcolor() should have decoded 8 chars, r/g/b/a should be 0.98/0.60/0.75/0.27 : %d chars decoded, r/g/b/a is %.2f/%.2f/%.2f/%.2f\n", j, dr, dg, db, da);
+
+    printf("    Testing hex2ccolor() and hex2dcolor() with bg (\"%s\"):\n", qs_k2v("bg", kvpairs, i));
+    j = hex2ccolor(qs_k2v("bg", kvpairs, i), &r, &g, &b, &a);
+    printf("        hex2ccolor() should have decoded 3 chars, r/g/b should be 0/240/0        : %d chars decoded, r/g/b is %d/%d/%d\n", j, r, g, b);
+    j = hex2dcolor(qs_k2v("bg", kvpairs, i), &dr, &dg, &db, &da);
+    printf("        hex2dcolor() should have decoded 3 chars, r/g/b should be 0.00/0.80/0.00 : %d chars decoded, r/g/b is %.2f/%.2f/%.2f\n", j, dr, dg, db);
+
+    printf("    Testing hex2ccolor() and hex2dcolor() with color (\"%s\"):\n", qs_k2v("color", kvpairs, i));
+    j = hex2ccolor(qs_k2v("color", kvpairs, i), &r, &g, &b, &a);
+    printf("        hex2ccolor() should have decoded 0 chars : %d chars decoded\n", j);
+    j = hex2ccolor(qs_k2v("color", kvpairs, i), &r, &g, &b, &a);
+    printf("        hex2dcolor() should have decoded 0 chars : %d chars decoded\n", j);
+
+/*
+    print
+
+    if ( qs_scanvalue("color", getstring, value, sizeof(value)) != NULL )
+    {
+        printf("Key %s is set, and the value is: \"%s\"\n", "color", value);
+        if ( hex2ccolor(value, &r, &g, &b, &a) != 0 && hex2dcolor(value, &dr, &dg, &db, &da) != 0 )
+        {
+            printf("    \"%s\" successfully decoded as uchar  : r=%d, g=%d, b=%d, a=%d\n", "color", r, g, b, a);
+            printf("    \"%s\" successfully decoded as double : r=%.2f, g=%.2f, b=%.2f, a=%.2f\n", "color", dr, dg, db, da);
+        }
+        else
+            printf("    \"%s\" NOT successfully decoded\n", "color");
+    }
+*/
     return 0;
 }
