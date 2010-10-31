@@ -38,6 +38,18 @@ char * qs_k2v(const char * key, char * qs_kv[], int qs_kv_size);
  *  destinaton string and length.  */
 char * qs_scanvalue(const char * key, const char * qs, char * val, size_t val_len);
 
+
+/*  Converts the 3 or 6 (RGB), or 4 or 8 (RGBA) hex chars in the color string
+ *  to double values in the range 0.0-1.0.  Returns the number of converted
+ *  chars.  */
+int hex2dcolor(char * color, double * r, double * g, double * b, double * a);
+
+
+/*  Converts the 3/6 (RGB) or 4/8 (RGBA) hex chars in the color string to
+ *  values spanning the full range of unsigned char, 0-255.  Returns the
+ *  number of converted chars.  */
+int hex2ccolor(char * color, unsigned char * r, unsigned char * g, unsigned char * b, unsigned char * a);
+
 #endif  // BG_QS_H_
 
 
