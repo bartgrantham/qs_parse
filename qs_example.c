@@ -15,6 +15,8 @@ int main(int argc, char * argv[])
 
     char getstring[] = "scheme://username:password@domain:port/path?foo=bar&frob&baz=quux&color=09FA#anchor";
 
+    printf("Our GET string is %s\n\n", getstring);
+
     /********************************************************/
     /*  The easy, but not as efficient way: qs_scanvalue()  */
     /********************************************************/
@@ -29,7 +31,7 @@ int main(int argc, char * argv[])
         printf("Key %s is NOT set\n", "baz");
 
     if ( qs_scanvalue("frob", getstring, value, sizeof(value)) != NULL )
-        printf("Key %s is set, and the value is: \"%s\n", "frob", value);
+        printf("Key %s is set, and the value is: \"%s\"\n", "frob", value);
     else
         printf("Key %s is NOT set\n", "frob");
 
