@@ -197,6 +197,8 @@ int hex2dcolor(char * color, double * r, double * g, double * b, double * a)
 {
     int i, j;
 
+    if ( color == NULL ) return 0;
+
     i = strlen(color);
     if ( i != 8 && i != 6 && i != 4 && i != 3 )  return 0;
     for(j=0; j<i; j++)  if ( ! ISHEX(color[j]) )  return 0;
@@ -233,6 +235,8 @@ int hex2dcolor(char * color, double * r, double * g, double * b, double * a)
 int hex2ccolor(char * color, unsigned char * r, unsigned char * g, unsigned char * b, unsigned char * a)
 {
     int i, j;
+
+    if ( color == NULL ) return 0;
 
     i = strlen(color);
     if ( i != 8 && i != 6 && i != 4 && i != 3 )  return 0;
