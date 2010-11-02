@@ -8,9 +8,9 @@ clean:
 	rm -f $(ALL)
 
 qs_test: qs.o qs_test.c
-	$(CC) $? -o $@
+	$(CC) $^ -o $@
 
 qs_example: qs.o qs_example.c
-	$(CC) $? -o $@
+	$(CC) $^ -o $@
 
 qs.o: qs.h
