@@ -38,10 +38,10 @@ code is implemented]
 
 Installation
 ------------
-All you really need is qs.h and qs.c.  I've included my test program
-("qs_test.c") and a quick program that shows how to use these functions
-("qs_example.c").  Also included is a quick Makefile.  If you want to see it
-come to life just get all the files and:
+All you really need is qs_parse.h and qs_parse.c.  I've included my test
+program ("qs_test.c") and an example program that shows how to use these
+functions ("qs_example.c").  Also included is a quick Makefile.  If you want
+to see it come to life just get all the files and:
 
 # make
 # ./qs_example

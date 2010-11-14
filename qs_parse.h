@@ -1,16 +1,13 @@
-/*  Licensed under the MIT License by Bart Grantham, 2010.  See ./LICENSE or
- *  http://www.opensource.org/licenses/mit-license.php
- */
+#include <string.h>
+
+#ifndef BG_QSPARSE_H_
+#define BG_QSPARSE_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
-#ifndef BG_QS_H_
-#define BG_QS_H_
-
 /*  string.h needed for strcspn() and strlen()  */
-#include <string.h>
 
 
 /*  Similar to strncmp, but handles URL-encoding for either string  */
@@ -50,9 +47,8 @@ int hex2dcolor(char * color, double * r, double * g, double * b, double * a);
  *  number of converted chars.  */
 int hex2ccolor(char * color, unsigned char * r, unsigned char * g, unsigned char * b, unsigned char * a);
 
-#endif  // BG_QS_H_
-
-
 #ifdef __cplusplus
 }
 #endif 
+
+#endif  // BG_QSPARSE_H_

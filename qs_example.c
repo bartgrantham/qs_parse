@@ -2,7 +2,7 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 #include <stdio.h>
-#include "qs.h"
+#include "qs_parse.h"
 
 #define NUMKVPAIRS 256
 #define VALSIZE 256

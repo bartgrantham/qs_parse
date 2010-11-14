@@ -1,11 +1,9 @@
-/*  Licensed under the MIT License by Bart Grantham, 2010.  See ./LICENSE or
- *  http://www.opensource.org/licenses/mit-license.php
- */
-#include "qs.h"
+#include "qs_parse.h"
 
 // TODO: implement sorting of the qs_kv array; for now ensure it's not compiled
 #undef _qsSORTING
 
+// isxdigit _is_ available in <ctype.h>, but let's avoid another header instead
 #define ISHEX(x)    ((((x)>='0'&&(x)<='9') || ((x)>='A'&&(x)<='F') || ((x)>='a'&&(x)<='f')) ? 1 : 0)
 #define HEX2DEC(x)  (((x)>='0'&&(x)<='9') ? (x)-48 : ((x)>='A'&&(x)<='F') ? (x)-55 : ((x)>='a'&&(x)<='f') ? (x)-87 : 0)
 #define ISQSCHR(x) ((((x)=='=')||((x)=='#')||((x)=='&')||((x)=='\0')) ? 0 : 1)
