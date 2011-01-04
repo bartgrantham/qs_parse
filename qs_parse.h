@@ -1,7 +1,7 @@
 #include <string.h>
 
-#ifndef BG_QS_H_
-#define BG_QS_H_
+#ifndef BG_QSPARSE_H_
+#define BG_QSPARSE_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,4 +51,4 @@ int hex2ccolor(char * color, unsigned char * r, unsigned char * g, unsigned char
 }
 #endif 
 
-#endif  // BG_QS_H_
+#endif  // BG_QSPARSE_H_

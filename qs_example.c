@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "qs.h"
+#include "qs_parse.h"
 
 #define NUMKVPAIRS 256
 #define VALSIZE 256

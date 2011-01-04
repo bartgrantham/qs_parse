@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "qs.h"
+#include "qs_parse.h"
 
 int main(int argc, char * argv[])
 {
