@@ -67,9 +67,6 @@ int main(int argc, char * argv[])
 
     printf("\n");
 
-    char end_foo[]     = "foo&";
-
-
 
     printf("    Testing qs_scanvalue() with query string:\n        %s\n", getstring);
     printf("        The following should say \"bleh bleh !\" : \"%s\"\n", qs_scanvalue("text", getstring, value, 256));
