@@ -1,3 +1,6 @@
+/*  Licensed under the MIT License by Bart Grantham, 2010.  See ./LICENSE or
+ *  http://www.opensource.org/licenses/mit-license.php
+ */
 #include <stdio.h>
 #include "qs_parse.h"
 
@@ -64,9 +67,6 @@ int main(int argc, char * argv[])
 
     printf("\n");
 
-    char end_foo[]     = "foo&";
-
-
 
     printf("    Testing qs_scanvalue() with query string:\n        %s\n", getstring);
     printf("        The following should say \"bleh bleh !\" : \"%s\"\n", qs_scanvalue("text", getstring, value, 256));
@@ -84,7 +84,7 @@ int main(int argc, char * argv[])
 
     printf("    Running qs_parse() against query string (also exersizes qs_decode()):\n        %s\n", getstring);
     i = qs_parse(getstring, kvpairs, 256);
-    printf("        I should have found 10 k/v substrings, actually found: %d\n", i);
+    printf("        I should have found 11 k/v substrings, actually found: %d\n", i);
     printf("\n");
 
     printf("    Testing qs_k2v() against our kv pair substrings:\n");
@@ -109,14 +109,14 @@ int main(int argc, char * argv[])
 
     printf("    Testing hex2ccolor() and hex2dcolor() with bg (\"%s\"):\n", qs_k2v("bg", kvpairs, i));
     j = hex2ccolor(qs_k2v("bg", kvpairs, i), &r, &g, &b, &a);
-    printf("        hex2ccolor() should have decoded 3 chars, r/g/b should be 0/240/0        : %d chars decoded, r/g/b is %d/%d/%d\n", j, r, g, b);
+    printf("        hex2ccolor() should have decoded 3 chars, r/g/b should be 0/204/0        : %d chars decoded, r/g/b is %d/%d/%d\n", j, r, g, b);
     j = hex2dcolor(qs_k2v("bg", kvpairs, i), &dr, &dg, &db, &da);
     printf("        hex2dcolor() should have decoded 3 chars, r/g/b should be 0.00/0.80/0.00 : %d chars decoded, r/g/b is %.2f/%.2f/%.2f\n", j, dr, dg, db);
 
     printf("    Testing hex2ccolor() and hex2dcolor() with color (\"%s\"):\n", qs_k2v("color", kvpairs, i));
     j = hex2ccolor(qs_k2v("color", kvpairs, i), &r, &g, &b, &a);
     printf("        hex2ccolor() should have decoded 0 chars : %d chars decoded\n", j);
-    j = hex2ccolor(qs_k2v("color", kvpairs, i), &r, &g, &b, &a);
+    j = hex2dcolor(qs_k2v("color", kvpairs, i), &dr, &dg, &db, &da);
     printf("        hex2dcolor() should have decoded 0 chars : %d chars decoded\n", j);
 
 /*

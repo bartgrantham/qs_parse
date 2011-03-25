@@ -11,8 +11,8 @@
 
 int qs_strncmp(const char * s, const char * qs, register size_t n)
 {
-    int i=0, j=0;
-    register unsigned char u1, u2, tmp, unyb, lnyb;
+    int i=0;
+    register unsigned char u1, u2, unyb, lnyb;
 
     while(n-- > 0)
     {
@@ -103,7 +103,6 @@ int qs_parse(char * qs, char * qs_kv[], int qs_kv_size)
 int qs_decode(char * qs)
 {
     int i=0, j=0;
-    unsigned char tmp;
 
     while( ISQSCHR(qs[j]) )
     {
@@ -132,7 +131,7 @@ int qs_decode(char * qs)
 
 char * qs_k2v(const char * key, char * qs_kv[], int qs_kv_size)
 {
-    int i, j;
+    int i;
     size_t key_len, skip;
 
     key_len = strlen(key);

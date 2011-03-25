@@ -55,10 +55,8 @@ enhancements to add.
 
 License
 -------
-Public Domain.  I grant *NO* warranties as to the correctness of this code or
-it's suitability for it's stated purpose.  In using this code, you grant that
-I am not responsible for any losses incurred as a result of this code.
-
+MIT License.  See ./LICENSE or
+http://www.opensource.org/licenses/mit-license.php
 
 Few things are more enjoyable than the knowledge that you've helped another
 person. If you do use these functions for anything, I'd love to hear about it:
