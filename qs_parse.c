@@ -1,4 +1,5 @@
 #include "qs_parse.h"
+#include <stdio.h>
 
 // TODO: implement sorting of the qs_kv array; for now ensure it's not compiled
 #undef _qsSORTING
@@ -49,7 +50,10 @@ int qs_strncmp(const char * s, const char * qs, register size_t n)
             return 0;
         i++;
     }
-    return 0;
+    if ( ISQSCHR(*qs) )
+        return -1;
+    else
+        return 0;
 }
 
 
